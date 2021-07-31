@@ -5,20 +5,21 @@ type CommandHandler struct {
 	Commands []*Command
 }
 
-// Option (flag) struct.
-type Option struct {
+// Command option (flag) struct.
+type CommandOption struct {
 	Name, Description string
 }
 
 // Command Data struct (arguments, options...)
 type CommandData struct {
-	Arguments, Options []string
+	Arguments []string
+	Options   []*CommandOption
 }
 
 // Command struct.
 type Command struct {
 	Name, Description string
-	Options           []*Option
+	Options           []*CommandOption
 	Usages            []string
 	CommandData       *CommandData
 	Execute           func(data *CommandData)

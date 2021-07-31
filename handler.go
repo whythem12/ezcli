@@ -31,9 +31,7 @@ func (ch *CommandHandler) Handle() {
 
 	// Get options and params
 	for _, item := range args {
-		if strings.HasPrefix(item, "-") {
-			commandData.Options = append(commandData.Options, item)
-		} else {
+		if !strings.HasPrefix(item, "-") {
 			commandData.Arguments = append(commandData.Arguments, item)
 		}
 	}
@@ -49,6 +47,17 @@ func (ch *CommandHandler) Handle() {
 
 	// Handle command
 	ch.FindCommand(commandName, func(c *Command) error {
+		// Add Options
+		for _, item := range args {
+			if strings.HasPrefix(item, "-") {
+				optionName := strings.TrimPrefix(item, "-")
+
+				c.FindOption(optionName, func(o *CommandOption) {
+					commandData.Options = append(commandData.Options, o)
+				})
+			}
+		}
+
 		c.CommandData = &commandData
 		c.Execute(c.CommandData)
 
@@ -65,4 +74,13 @@ func (ch *CommandHandler) FindCommand(name string, fn func(c *Command) error) er
 	}
 
 	return errors.New("Command not found! Please check your parameter")
+}
+
+// Find an option from command.
+func (c *Command) FindOption(name string, fn func(o *CommandOption)) {
+	for _, item := range c.Options {
+		if strings.EqualFold(item.Name, name) {
+			fn(item)
+		}
+	}
 }
