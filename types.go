@@ -21,5 +21,5 @@ type Command struct {
 	Options           []*Option
 	Usages            []string
 	CommandData       *CommandData
-	Handler           func()
+	Execute           func(data *CommandData)
 }
