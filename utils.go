@@ -15,7 +15,9 @@ func CreateHandler() *CommandHandler {
 		Name:        "help",
 		Description: "Built-in help command for application.",
 		Usages:      []string{"help", "help <command name>"},
-		Execute: func(data *CommandData) {
+		Execute: func(c *Command) {
+			data := c.CommandData
+
 			if len(data.Arguments) == 0 {
 				fmt.Println("List of all commands. For more information, add a command name parameter to command.")
 				for _, command := range handler.Commands {

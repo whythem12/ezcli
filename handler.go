@@ -59,7 +59,7 @@ func (ch *CommandHandler) Handle() {
 		}
 
 		c.CommandData = &commandData
-		c.Execute(c.CommandData)
+		c.Execute(c)
 
 		return nil
 	})
