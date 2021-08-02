@@ -17,6 +17,13 @@ func (ch *CommandHandler) AddCommand(c *Command) {
 	ch.Commands = append(ch.Commands, c)
 }
 
+// Add more command to the handler.
+func (ch *CommandHandler) AddCommands(cs []*Command) {
+	for _, c := range cs {
+		ch.AddCommand(c)
+	}
+}
+
 // Handle commands.
 func (ch *CommandHandler) Handle() {
 	args := os.Args[1:]
