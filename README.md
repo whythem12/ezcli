@@ -34,7 +34,7 @@ import (
 )
 
 func main() {
-    handler := ezcli.CreateHandler() // Create handle function also gives built-in help command. So you dont need to write a help command yourself.
+    handler := ezcli.CreateHandler() // Create handle function also gives built-in help command. So you don't need to write a help command yourself.
 
     // Adding a new command.
     handler.AddCommand(&ezcli.Command{
@@ -46,7 +46,7 @@ func main() {
                 Description: "A test command", // Option description.
             },
         },
-        Execute: func(c *ezcli.CommandData) { // The function will run.
+        Execute: func(c *ezcli.Command) { // The function will run.
             fmt.Println("Hello Command!")
         },
     })
@@ -62,7 +62,7 @@ Time to test our app! Run the compiled app with `./<name> help`
 
 You should get the following result:
 
-```bash
+```
 List of all commands. For more information, add a command name parameter to command.
   help | Built-in help command for application.
   hello | Say hello world!
