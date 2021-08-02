@@ -1,7 +1,7 @@
 package ezcli
 
 import (
-	"errors"
+	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -73,7 +73,7 @@ func (ch *CommandHandler) FindCommand(name string, fn func(c *Command) error) er
 		}
 	}
 
-	return errors.New("Command not found! Please check your parameter")
+	return fmt.Errorf("Command not found! Please check your parameter")
 }
 
 // Find an option from command.
