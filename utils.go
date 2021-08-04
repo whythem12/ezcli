@@ -66,8 +66,17 @@ func (ch *CommandHandler) FindCommand(name string, fn func(c *Command) error) er
 	return fmt.Errorf("Command not found! Please check your parameter")
 }
 
-// Find an option from command.
+// Find an option template from command.
 func (c *Command) FindOption(name string, fn func(o *CommandOption)) {
+	for _, item := range c.Options {
+		if strings.EqualFold(item.Name, name) || stringSliceContains(item.Aliases, name) {
+			fn(item)
+		}
+	}
+}
+
+// Find an option from command data.
+func (c *CommandData) FindOption(name string, fn func(o *CommandOption)) {
 	for _, item := range c.Options {
 		if strings.EqualFold(item.Name, name) || stringSliceContains(item.Aliases, name) {
 			fn(item)
