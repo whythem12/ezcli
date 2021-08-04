@@ -56,7 +56,7 @@ func (ch *CommandHandler) Handle() {
 		// Add Options
 		for _, item := range args {
 			if strings.HasPrefix(item, "-") {
-				optionName, optionValue := strings.TrimPrefix(item, "-"), ""
+				optionName, optionValue := strings.TrimLeft(item, "-"), ""
 
 				// If has a value
 				if strings.Contains(optionName, "=") {
