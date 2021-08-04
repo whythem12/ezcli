@@ -52,3 +52,23 @@ func CreateHandler() *CommandHandler {
 
 	return &handler
 }
+
+// Find a command from handler.
+func (ch *CommandHandler) FindCommand(name string, fn func(c *Command) error) error {
+	for _, item := range ch.Commands {
+		if strings.EqualFold(item.Name, name) {
+			return fn(item)
+		}
+	}
+
+	return fmt.Errorf("Command not found! Please check your parameter")
+}
+
+// Find an option from command.
+func (c *Command) FindOption(name string, fn func(o *CommandOption)) {
+	for _, item := range c.Options {
+		if strings.EqualFold(item.Name, name) {
+			fn(item)
+		}
+	}
+}

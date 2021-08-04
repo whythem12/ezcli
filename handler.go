@@ -1,7 +1,6 @@
 package ezcli
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"strings"
@@ -57,9 +56,17 @@ func (ch *CommandHandler) Handle() {
 		// Add Options
 		for _, item := range args {
 			if strings.HasPrefix(item, "-") {
-				optionName := strings.TrimPrefix(item, "-")
+				optionName, optionValue := strings.TrimPrefix(item, "-"), ""
+
+				// If has a value
+				if strings.Contains(optionName, "=") {
+					splittedText := strings.SplitN(optionName, "=", 2)
+					optionName = splittedText[0]
+					optionValue = splittedText[1]
+				}
 
 				c.FindOption(optionName, func(o *CommandOption) {
+					o.Value = optionValue
 					commandData.Options = append(commandData.Options, o)
 				})
 			}
@@ -70,24 +77,4 @@ func (ch *CommandHandler) Handle() {
 
 		return nil
 	})
-}
-
-// Find a command from handler.
-func (ch *CommandHandler) FindCommand(name string, fn func(c *Command) error) error {
-	for _, item := range ch.Commands {
-		if strings.EqualFold(item.Name, name) {
-			return fn(item)
-		}
-	}
-
-	return fmt.Errorf("Command not found! Please check your parameter")
-}
-
-// Find an option from command.
-func (c *Command) FindOption(name string, fn func(o *CommandOption)) {
-	for _, item := range c.Options {
-		if strings.EqualFold(item.Name, name) {
-			fn(item)
-		}
-	}
 }

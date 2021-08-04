@@ -7,7 +7,7 @@ type CommandHandler struct {
 
 // Command option (flag) struct.
 type CommandOption struct {
-	Name, Description string
+	Name, Description, Value string
 }
 
 // Command Data struct (arguments, options...)
