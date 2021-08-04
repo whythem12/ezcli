@@ -23,6 +23,11 @@ func (ch *CommandHandler) AddCommands(cs []*Command) {
 	}
 }
 
+// Set error function that will run when command not found.
+func (ch *CommandHandler) SetNotFoundFunction(fn func()) {
+	ch.CommandNotFoundFunc = fn
+}
+
 // Handle commands.
 func (ch *CommandHandler) Handle() {
 	args := os.Args[1:]
@@ -30,7 +35,6 @@ func (ch *CommandHandler) Handle() {
 	// Check parameter length
 	if len(args) == 0 {
 		log.Fatal("You need to pass a command. Type 'help' for show all commands.")
-		os.Exit(1)
 	}
 
 	commandData := CommandData{}
@@ -45,14 +49,13 @@ func (ch *CommandHandler) Handle() {
 	// Check parameter length
 	if len(commandData.Arguments) == 0 {
 		log.Fatal("You need to pass a command. Type 'help' for show all commands.")
-		os.Exit(1)
 	}
 
 	commandName := commandData.Arguments[0]
 	commandData.Arguments = commandData.Arguments[1:]
 
 	// Handle command
-	ch.FindCommand(commandName, func(c *Command) error {
+	err := ch.FindCommand(commandName, func(c *Command) error {
 		// Add Options
 		for _, item := range args {
 			if strings.HasPrefix(item, "-") {
@@ -77,4 +80,9 @@ func (ch *CommandHandler) Handle() {
 
 		return nil
 	})
+
+	if err != nil {
+		ch.CommandNotFoundFunc()
+		return
+	}
 }

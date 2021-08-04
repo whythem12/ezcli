@@ -2,7 +2,8 @@ package ezcli
 
 // Command Handler struct.
 type CommandHandler struct {
-	Commands []*Command
+	Commands            []*Command
+	CommandNotFoundFunc func()
 }
 
 // Command option (flag) struct.

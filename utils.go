@@ -3,13 +3,16 @@ package ezcli
 import (
 	"fmt"
 	"log"
-	"os"
 	"strings"
 )
 
 // Create a command handler with built-in help command.
 func CreateHandler() *CommandHandler {
 	var handler CommandHandler
+
+	handler.SetNotFoundFunction(func() {
+		log.Fatal("Command not found! Please run command 'help' for list all commands.")
+	})
 
 	handler.AddCommand(&Command{
 		Name:        "help",
@@ -44,7 +47,6 @@ func CreateHandler() *CommandHandler {
 				// Command not found
 				if err != nil {
 					log.Fatal(err)
-					os.Exit(1)
 				}
 			}
 		},
