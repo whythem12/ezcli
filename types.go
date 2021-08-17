@@ -2,6 +2,7 @@ package ezcli
 
 // Command Handler struct.
 type CommandHandler struct {
+	Name                string
 	Commands            []*Command
 	CommandNotFoundFunc func()
 }

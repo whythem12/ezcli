@@ -28,6 +28,11 @@ func (ch *CommandHandler) SetNotFoundFunction(fn func()) {
 	ch.CommandNotFoundFunc = fn
 }
 
+// Set App Name
+func (ch *CommandHandler) SetName(name string) {
+	ch.Name = name
+}
+
 // Handle commands.
 func (ch *CommandHandler) Handle() {
 	args := os.Args[1:]

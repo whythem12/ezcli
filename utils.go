@@ -7,8 +7,9 @@ import (
 )
 
 // Create a command handler with built-in help command.
-func CreateHandler() *CommandHandler {
+func NewApp(appName string) *CommandHandler {
 	var handler CommandHandler
+	handler.SetName(appName)
 
 	handler.SetNotFoundFunction(func() {
 		log.Fatal("Command not found! Please run command 'help' for list all commands.")
@@ -22,7 +23,7 @@ func CreateHandler() *CommandHandler {
 			data := c.CommandData
 
 			if len(data.Arguments) == 0 {
-				fmt.Println("List of all commands. For more information, add a command name parameter to command.")
+				fmt.Printf("List of all commands. For more information: %s help <command>\n", handler.Name)
 				for _, command := range handler.Commands {
 					fmt.Printf("  %s | %s\n", command.Name, command.Description)
 				}
