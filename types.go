@@ -27,3 +27,8 @@ type Command struct {
 	CommandData       *CommandData
 	Execute           func(data *Command)
 }
+
+// Question struct.
+type Question struct {
+	Input, Answer string
+}

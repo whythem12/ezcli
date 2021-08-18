@@ -1,8 +1,10 @@
 package ezcli
 
 import (
+	"bufio"
 	"fmt"
 	"log"
+	"os"
 	"strings"
 )
 
@@ -83,4 +85,22 @@ func (c *CommandData) FindOption(name string, fn func(o *CommandOption)) {
 			fn(item)
 		}
 	}
+}
+
+// Ask the question.
+func (q *Question) Ask() error {
+	// Ask the question
+	fmt.Print(q.Input)
+
+	// Wait for input
+	reader := bufio.NewReader(os.Stdin)
+	result, err := reader.ReadString('\n')
+
+	if err != nil {
+		return err
+	}
+
+	// Change struct
+	q.Answer = strings.TrimSpace(result)
+	return nil
 }
