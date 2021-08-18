@@ -18,7 +18,7 @@ Ezcli is a Go package for building CLI tools easily.
 
 ## API Reference
 
-Click [here](https://pkg.go.dev/github.com/5elenay/ezcli@v1.1.0) for API reference. (pkg.go.dev sometime does not update package version, so use `https://pkg.go.dev/github.com/5elenay/ezcli@<latest version>` for get the API reference for latest version.)
+Click [here](https://pkg.go.dev/github.com/5elenay/ezcli) for API reference. (pkg.go.dev sometime does not update package version, so use `https://pkg.go.dev/github.com/5elenay/ezcli@<latest version>` for get the API reference for latest version.)
 
 ## Documentations
 
@@ -26,6 +26,7 @@ Click [here](https://pkg.go.dev/github.com/5elenay/ezcli@v1.1.0) for API referen
 - [Arguments](https://github.com/5elenay/ezcli/blob/main/docs/Arguments.md)
 - [Aliases](https://github.com/5elenay/ezcli/blob/main/docs/Aliases.md)
 - [Questions](https://github.com/5elenay/ezcli/blob/main/docs/Questions.md)
+- [Sub-Commands](https://github.com/5elenay/ezcli/blob/main/docs/SubCommands.md)
 
 ## Example
 
