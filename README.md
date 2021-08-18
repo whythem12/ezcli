@@ -25,6 +25,7 @@ Click [here](https://pkg.go.dev/github.com/5elenay/ezcli@v1.1.0) for API referen
 - [Options / Flags](https://github.com/5elenay/ezcli/blob/main/docs/Options.md)
 - [Arguments](https://github.com/5elenay/ezcli/blob/main/docs/Arguments.md)
 - [Aliases](https://github.com/5elenay/ezcli/blob/main/docs/Aliases.md)
+- [Questions](https://github.com/5elenay/ezcli/blob/main/docs/Questions.md)
 
 ## Example
 
