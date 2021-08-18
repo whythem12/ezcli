@@ -40,7 +40,7 @@ import (
 )
 
 func main() {
-    handler := ezcli.CreateHandler() // Create handle function also gives built-in help command. So you don't need to write a help command yourself.
+    handler := ezcli.NewApp("test") // Create handle function also gives built-in help command. So you don't need to write a help command yourself.
 
     // Adding a new command.
     handler.AddCommand(&ezcli.Command{
