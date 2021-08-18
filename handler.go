@@ -80,8 +80,22 @@ func (ch *CommandHandler) Handle() {
 			}
 		}
 
-		c.CommandData = &commandData
-		c.Execute(c)
+		// Check Sub-commands
+		if len(commandData.Arguments) > 0 {
+			err := c.FindSubcommand(commandData.Arguments[0], func(sc *SubCommand) {
+				commandData.Arguments = commandData.Arguments[1:]
+				sc.CommandData = &commandData
+				sc.Execute(sc)
+			})
+
+			if err != nil {
+				c.CommandData = &commandData
+				c.Execute(c)
+			}
+		} else {
+			c.CommandData = &commandData
+			c.Execute(c)
+		}
 
 		return nil
 	})

@@ -44,6 +44,15 @@ func NewApp(appName string) *CommandHandler {
 						}
 					}
 
+					// Sub-commands
+					if len(c.SubCommands) > 0 {
+						fmt.Println("  Sub-Commands:")
+
+						for _, item := range c.SubCommands {
+							fmt.Printf("    Name: %s\n    Description: %s\n    Usages:\n      %s\n\n", item.Name, item.Description, strings.Join(item.Usages, "\n      "))
+						}
+					}
+
 					return nil
 				})
 
@@ -103,4 +112,16 @@ func (q *Question) Ask() error {
 	// Change struct
 	q.Answer = strings.TrimSpace(result)
 	return nil
+}
+
+// Find Sub-command
+func (c Command) FindSubcommand(name string, fn func(sc *SubCommand)) error {
+	for _, item := range c.SubCommands {
+		if strings.EqualFold(item.Name, name) {
+			fn(item)
+			return nil
+		}
+	}
+
+	return fmt.Errorf("sub-command not found")
 }

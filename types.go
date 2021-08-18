@@ -25,10 +25,19 @@ type Command struct {
 	Options           []*CommandOption
 	Usages, Aliases   []string
 	CommandData       *CommandData
-	Execute           func(data *Command)
+	Execute           func(c *Command)
+	SubCommands       []*SubCommand
 }
 
 // Question struct.
 type Question struct {
 	Input, Answer string
+}
+
+// Sub-Command struct
+type SubCommand struct {
+	Name, Description string
+	Usages            []string
+	CommandData       *CommandData
+	Execute           func(sc *SubCommand)
 }
